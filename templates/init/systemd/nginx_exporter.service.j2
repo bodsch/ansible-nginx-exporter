@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description       = Prometheus nginx Exporter
+After             = network.target
+
+[Service]
+User              = {{ nginx_exporter_system_user }}
+Group             = {{ nginx_exporter_system_group }}
+EnvironmentFile   = {{ sysconfig_directory }}/nginx_exporter
+
+ExecReload        = /bin/kill -HUP $MAINPID
+ExecStart         = /usr/bin/nginx_exporter $OPTIONS
+
+LimitNOFILE       = 65000
+SyslogIdentifier  = nginx_exporter
+Restart           = always
+
+[Install]
+WantedBy          = multi-user.target

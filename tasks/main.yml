@@ -1,0 +1,36 @@
+---
+
+- name: prepare
+  ansible.builtin.import_tasks: prepare.yaml
+  tags:
+    - nginx_exporter_install
+    - nginx_exporter_configure
+    - nginx_exporter_run
+
+- name: download archive
+  ansible.builtin.include_tasks: download.yaml
+  when:
+    - not stat_nginx_exporter_binary.stat.exists
+  tags:
+    - nginx_exporter_install
+
+- name: install
+  ansible.builtin.include_tasks: install.yaml
+  when:
+    - not stat_nginx_exporter_binary.stat.exists
+  tags:
+    - nginx_exporter_install
+
+- name: create nginx exporter config
+  ansible.builtin.import_tasks: configure.yaml
+  tags:
+    - nginx_exporter_configure
+
+- name: service
+  ansible.builtin.import_tasks: service.yaml
+  become: true
+  tags:
+    - nginx_exporter_run
+    - nginx_exporter_configure
+
+...

@@ -1,0 +1,6 @@
+---
+
+- name: nginx
+  src: bodsch.nginx
+
+...

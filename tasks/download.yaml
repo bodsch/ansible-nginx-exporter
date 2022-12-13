@@ -1,0 +1,28 @@
+---
+# https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz
+
+- name: download nginx_exporter binary archive
+  become: false
+  delegate_to: "{{ nginx_exporter_delegate_to }}"
+  run_once: "{{ 'false' if nginx_exporter_direct_download else 'true' }}"
+  ansible.builtin.get_url:
+    url: "{{ nginx_exporter_release.download_url }}/download/v{{ nginx_exporter_version }}/{{ nginx_exporter_release.file }}"
+    dest: "{{ nginx_exporter_local_tmp_directory }}/nginx_exporter-{{ nginx_exporter_version }}.tar.gz"
+    mode: 0600
+  register: _download_archive
+  until: _download_archive is succeeded
+  retries: 5
+  delay: 2
+  check_mode: false
+
+- name: extract nginx_exporter archive
+  become: false
+  delegate_to: "{{ nginx_exporter_delegate_to }}"
+  run_once: "{{ 'false' if nginx_exporter_direct_download else 'true' }}"
+  ansible.builtin.unarchive:
+    src: "{{ nginx_exporter_local_tmp_directory }}/nginx_exporter-{{ nginx_exporter_version }}.tar.gz"
+    dest: "{{ nginx_exporter_local_tmp_directory }}"
+    copy: false
+  register: _extract_archive
+
+...
