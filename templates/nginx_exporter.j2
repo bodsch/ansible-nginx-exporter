@@ -2,13 +2,31 @@
 # {{ ansible_managed }}
 
 OPTIONS="
-  {% if nginx_exporter_nginx_plus %}-nginx.plus\ {% endif %}
+  {% if nginx_exporter_nginx_plus %}-nginx.plus \ {% endif %}
+{% if nginx_exporter_config.nginx.retries is defined and
+      nginx_exporter_config.nginx.retries | string | length > 0 %}
   -nginx.retries {{ nginx_exporter_config.nginx.retries }} \
+{% endif %}
+{% if nginx_exporter_config.nginx.retry_interval is defined and
+      nginx_exporter_config.nginx.retry_interval | string | length > 0 %}
   -nginx.retry-interval {{ nginx_exporter_config.nginx.retry_interval }} \
+{% endif %}
+{% if nginx_exporter_config.nginx.scrape_uri is defined and
+      nginx_exporter_config.nginx.scrape_uri | string | length > 0 %}
   -nginx.scrape-uri {{ nginx_exporter_config.nginx.scrape_uri }} \
+{% endif %}
+{% if nginx_exporter_config.nginx.timeout is defined and
+      nginx_exporter_config.nginx.timeout | string | length > 0 %}
   -nginx.timeout {{ nginx_exporter_config.nginx.timeout }} \
+{% endif %}
+{% if nginx_exporter_config.web.listen_address is defined and
+      nginx_exporter_config.web.listen_address | string | length > 0 %}
   -web.listen-address {{ nginx_exporter_config.web.listen_address }} \
+{% endif %}
+{% if nginx_exporter_config.web.telemetry_path is defined and
+      nginx_exporter_config.web.telemetry_path | string | length > 0 %}
   -web.telemetry-path {{ nginx_exporter_config.web.telemetry_path }}
+{% endif %}
 "
 
 {#

@@ -13,6 +13,5 @@
   ansible.builtin.service:
     name: nginx_exporter
     state: restarted
-    daemon_reload: true
 
 ...

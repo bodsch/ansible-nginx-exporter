@@ -1,6 +1,6 @@
 ---
 nginx_exporter_config:
   nginx:
-     scrape_uri: http://127.0.0.1:8088/nginx_status
+    scrape_uri: http://127.0.0.1:8088/nginx_status
 
 ...
