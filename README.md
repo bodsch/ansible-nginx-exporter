@@ -3,13 +3,15 @@
 
 Ansible role to install and configure [Nginx Prometheus Exporter](https://github.com/nginxinc/nginx-prometheus-exporter).
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/bodsch/ansible-nginx-exporter/CI)][ci]
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/bodsch/ansible-nginx-exporter/main.yml?branch=main)][ci]
 [![GitHub issues](https://img.shields.io/github/issues/bodsch/ansible-nginx-exporter)][issues]
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/bodsch/ansible-nginx-exporter)][releases]
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/50067?label=role%20quality)][quality]
 
 [ci]: https://github.com/bodsch/ansible-nginx-exporter/actions
 [issues]: https://github.com/bodsch/ansible-nginx-exporter/issues?q=is%3Aopen+is%3Aissue
 [releases]: https://github.com/bodsch/ansible-nginx-exporter/releases
+[quality]: https://galaxy.ansible.com/bodsch/nginx_exporter
 
 
 If `latest` is set for `nginx_exporter_version`, the role tries to install the latest release version.  
